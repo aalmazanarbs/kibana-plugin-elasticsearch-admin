@@ -1,0 +1,82 @@
+<div>
+    <div ng-include src="'../plugins/kibana_plugin_elasticsearch_admin/templates/alerts.html'"></div>
+    <div ng-include src="'../plugins/kibana_plugin_elasticsearch_admin/templates/header.html'"></div>
+    <div ng-controller="indexDetailController">
+        <div class="container">                    
+            <div ng-init="selectedTab = 1;">
+                <ul class="nav nav-tabs nav-justified">
+                    <li ng-class="{active: selectedTab == 1}">
+                        <a href="#" ng-click="selectedTab = 1;stopClick($event);">Settings</a>
+                    </li>
+                    <li ng-class="{active: selectedTab == 2}">
+                            <a href="#" ng-click="selectedTab = 2;stopClick($event);">Stats</a>
+                        </li>
+                    <li ng-class="{active: selectedTab == 3}">
+                        <a href="#" ng-click="selectedTab = 3;stopClick($event);">Mappings</a>
+                    </li>
+                    <li ng-class="{active: selectedTab == 4}">
+                        <a href="#" ng-click="selectedTab = 4;stopClick($event);">Segments</a>
+                    </li>
+                    <li ng-class="{active: selectedTab == 5}">
+                        <a href="#" ng-click="selectedTab = 5;stopClick($event);">Actions</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content" ng-show="selectedTab == 1">
+                    <div class="pre_index_detail" ng-bind-html="index.settings"></div>
+                </div>
+
+                <div class="tab-content" ng-show="selectedTab == 2">
+                    <div class="pre_index_detail" ng-bind-html="index.stats"></div>
+                </div>
+
+                <div class="tab-content" ng-show="selectedTab == 3">
+                    <div class="pre_index_detail" ng-bind-html="index.mappings"></div>
+                </div>
+
+                <div class="tab-content" ng-show="selectedTab == 4">
+                    <div class="pre_index_detail" ng-bind-html="index.segments"></div>
+                </div>
+
+                <div class="tab-content" ng-show="selectedTab == 5">
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-3 col-xs-0">
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-xs-6">
+                            <ul class="action_list">
+                                <li ng-click="!index.closed && clearCacheIndex();" tooltip="{{ texts.clear_cache_index_description }}" tooltip-placement="left" tooltip-popup-delay="0" tooltip-append-to-body="1">
+                                    <a href="javascript:void(0);" ng-class="{index_closed: index.closed}"><i class="fa fa-fw fa-eraser"></i> Clear cache</a>
+                                </li>
+                                <li ng-click="!index.closed && closeIndex();" tooltip="{{ texts.open_close_index_description }}" tooltip-placement="left" tooltip-popup-delay="0" tooltip-append-to-body="1">
+                                    <a href="javascript:void(0);" ng-class="{index_closed: index.closed}"><i class="fa fa-fw fa-times-circle"></i> Close index</a>
+                                </li>
+                                <li ng-click="deleteIndex()" tooltip="{{ texts.delete_index_description }}" tooltip-placement="left" tooltip-popup-delay="0" tooltip-append-to-body="1">
+                                    <a href="javascript:void(0);"><i class="fa fa-fw fa-trash"></i> Delete index</a>
+                                </li>
+                                <li ng-click="!index.closed && forceFlushIndex();" tooltip="{{ texts.flush_index_description }}" tooltip-placement="left" tooltip-popup-delay="0" tooltip-append-to-body="1">
+                                    <a href="javascript:void(0);" ng-class="{index_closed: index.closed}"><i class="fa fa-fw fa-tasks"></i> Force Flush index</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-xs-6">
+                            <ul class="action_list">
+                                <li ng-click="!index.closed && forceMergeIndex();" tooltip="{{ texts.force_merge_index_description }}" tooltip-placement="right" tooltip-popup-delay="0" tooltip-append-to-body="1">
+                                    <a href="javascript:void(0);" ng-class="{index_closed: index.closed}"><i class="fa fa-fw fa-compress"></i> Force merge index</a>
+                                </li>
+                                <li ng-click="index.closed && openIndex();" tooltip="{{ texts.open_close_index_description }}" tooltip-placement="right" tooltip-popup-delay="0" tooltip-append-to-body="1">
+                                    <a href="javascript:void(0);" ng-class="{index_closed: !index.closed}"><i class="fa fa-fw fa-folder-open-o"></i> Open index</a>
+                                </li>
+                                <li ng-click="!index.closed && refreshIndex();" tooltip="{{ texts.refresh_index_description }}" tooltip-placement="right" tooltip-popup-delay="0" tooltip-append-to-body="1">
+                                    <a href="javascript:void(0);" ng-class="{index_closed: index.closed}"><i class="fa fa-fw fa-refresh"></i> Refresh index</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-xs-0">
+                        </div>
+                    </div>                   
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-include src="'../plugins/kibana_plugin_elasticsearch_admin/templates/modal.html'"></div>
+</div>

@@ -1,0 +1,14 @@
+<div ng-controller="headerController">
+    <ol class="breadcrumb kp_nav">
+        <li ng-repeat="breadcrumb in breadcrumbs" class="breadcrumb-item kp_nav_text" ng-class="{ active : breadcrumb.active}" >
+            <a ng-if="breadcrumb.url" href="{{ breadcrumb.url }}">{{ breadcrumb.name }}</a>
+            <span ng-if="!breadcrumb.url">{{ breadcrumb.name }}</span>
+        </li>
+
+        <div class="menu_row">
+            <div class="menu_tabs">
+                <a class="menu_tab" ng-repeat="item in menuItems" ng-class="{ menu_tab_selected : item.selected}" href="{{ item.selected ? 'javascript:void(0);' : item.url }}">{{ item.name }}</a>
+            </div>
+        </div>
+    </ol>
+</div>

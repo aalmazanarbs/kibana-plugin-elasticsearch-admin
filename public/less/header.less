@@ -1,0 +1,36 @@
+.menu_row {
+    min-height: 32px;
+    position: relative;
+    bottom: -8px;
+}
+
+.menu_tabs {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: end;
+    -webkit-align-items: flex-end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+}
+
+.menu_tab {
+    padding: 5px 0px 5px 0;
+    font-size: 18px;
+    line-height: 22px;
+    color: #5a5a5a;
+    border-bottom: 2px solid transparent;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.menu_tab + .menu_tab {
+    margin-left: 15px;
+}
+
+.menu_tab_selected {
+    color: #000000;
+    border-bottom-color: #000000;
+    cursor: not-allowed;
+}

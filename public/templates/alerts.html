@@ -1,0 +1,7 @@
+<div class="alerts_container" ng-controller="alertController">
+    <div id="{{a.id}}" ng-repeat="a in alerts" class="alert" ng-class="a.class">
+        <span class="pull-right normal-action" ng-click="clearAlert(a.id)"><i class="fa fa-times-circle"></i></span>
+        <i ng-class="a.icon"></i>
+        <span>{{a.message}}</span>
+    </div>
+</div>

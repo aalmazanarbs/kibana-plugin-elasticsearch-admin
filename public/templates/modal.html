@@ -1,0 +1,12 @@
+<div ng-controller="modalController" class="modal" id="confirm_dialog" role="dialog" ng-show="modalService.show">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body" ng-show="modalService.text">{{modalService.text}}</div>
+            <div class="modal-body" ng-bind-html="modalService.info"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="modalService.close()">Cancel</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal" ng-click="modalService.confirm()" ng-show="modalService.needsConfirmation()">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>

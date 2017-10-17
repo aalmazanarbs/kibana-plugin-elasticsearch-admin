@@ -1,0 +1,43 @@
+<div>
+    <div ng-include src="'../plugins/kibana_plugin_elasticsearch_admin/templates/alerts.html'"></div>
+    <div ng-include src="'../plugins/kibana_plugin_elasticsearch_admin/templates/header.html'"></div>
+    <div ng-controller="indexListController">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-sm-3 col-xs-12 form-group">
+                    <input type="text" ng-model="indices_filters.name" class="form-control form-control-sm" ng-model-options='{ debounce: 250 }'
+                        placeholder="filter indices by name">
+                </div>
+                <div class="col-lg-3 col-sm-3 col-xs-6 form-group index_filter">
+                    <label class="kuiCheckBoxLabel kuiVerticalRhythm">
+                        <input class="kuiCheckBox" type="checkbox" ng-model='indices_filters.closed'>
+                        <span class="kuiCheckBoxLabel__text">Closed</span>
+                    </label>
+                </div>
+                <div class="col-lg-3 col-sm-3 col-xs-6 form-group index_filter">
+                    <label class="kuiCheckBoxLabel kuiVerticalRhythm">
+                        <input class="kuiCheckBox" type="checkbox" ng-model='indices_filters.special'>
+                        <span class="kuiCheckBoxLabel__text">. Special</span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-sm-6 index-card" ng-repeat="idx in indices | indicesFilter: indices_filters as indicesFiltered">
+                    <div class="card">
+                        <div class="card-block">
+                            <h4 class="card-title">
+                                <span class="square_health square_health_{{ idx.status === 'close' ? 'none' : idx.health }}">{{ idx.index }}</span>
+                            </h4>
+                            <p class="card-text">Status: {{ idx.status }}</p>
+                            <p class="card-text">Docs: {{ idx['docs.count']}}</p>
+                            <p class="card-text">Shards: {{ idx.status === 'close' ? '' : idx.pri + ' * ' + idx.rep }}</p>
+                            <p class="card-text">Size: {{ idx['store.size'] }}</p>
+                            <a href="#/index_detail/{{ idx.index }}" class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> Settings</a>
+                        </div>
+                    </div>
+                </div>
+                <div id="no-index-message" ng-show="!indicesFiltered.length">No indices found for this filters</div>
+            </div>
+        </div>
+    </div>
+</div>
